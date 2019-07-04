@@ -7,6 +7,10 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { NgbootstrapModule } from './shared/modules/ngbootstrap/ngbootstrap.module';
 import { NgmaterialModule } from './shared/modules/ngmaterial/ngmaterial.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {environment} from '../environments/environment';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -18,9 +22,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppRoutingModule,
     NgbootstrapModule,
     NgmaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
