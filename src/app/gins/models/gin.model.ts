@@ -1,4 +1,5 @@
 export interface GinModel {
+  id: string;
   name: string;
   description: string;
   content: string;

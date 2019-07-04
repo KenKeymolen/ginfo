@@ -4,6 +4,7 @@ import {GinDetailsComponent} from './components/gin-details/gin-details.componen
 import {GinsOverviewComponent} from './components/gins-overview/gins-overview.component';
 
 const routes: Routes = [
+  {path: '', component: GinsOverviewComponent, pathMatch: 'full'},
   {path: 'list', component: GinsOverviewComponent, pathMatch: 'full'},
   {path: ':id', component: GinDetailsComponent, pathMatch: 'full'},
 ];
