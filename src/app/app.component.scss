@@ -1,0 +1,21 @@
+.navigation {
+  position:absolute;
+  top:0;
+  z-index: 1000;
+  width:100%;
+}
+
+.user-info:hover {
+  cursor: pointer;
+}
+
+.footer-section {
+  background:lightslategrey;
+  padding: 15px 0;
+  letter-spacing:2px;
+}
+
+.brand-quote {
+  font-size:14px;
+  letter-spacing:2px;
+}

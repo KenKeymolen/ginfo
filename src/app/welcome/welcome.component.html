@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 main-background-image content-section center-content-container" [ngStyle]="{ 'background-image': 'url(' + mainBackgroundUrl + ')'}">
+      <div class="main-header container">
+        <div class="row">
+          <div class="col-12">
+            <h1>Ginfo</h1>
+            <hr>
+            <p>A community of Gin Lovers</p>
+            <br>
+            <div class="btn btn-lg btn-outline-light" routerLink="gins/list"><i class="fas fa-cocktail"></i> View all Recipes</div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-type1" (click)="scrollToElement(section2)"></div>
+    </div>
+  </div>
+  <div class="row" #section2>
+    <div class="container align-self-center content-section">
+      <h1 class="mt-5">One place for all your ginspirations</h1>
+      <div class="row mt-5">
+        <div class="col-md-8">
+          <h3><i class="fab fa-pagelines"></i> | The best ingredients, additions and tonics for your Gin</h3>
+          <p>Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting.</p>
+        </div>
+        <div class="col-md-4 mt-sm-3"><img class="img-fluid" src="../assets/images/p7.jpg"></div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-md-8 order-md-12 text-md-left">
+          <h3><i class="fas fa-wine-bottle"></i> | Discover your next Gin</h3>
+          <p>Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting.</p>
+        </div>
+        <div class="col-md-4 order-md-3 mt-sm-3"><img class="img-fluid" src="../assets/images/p1.jpg"></div>
+      </div>
+
+      <div class="row mt-5 pb-5">
+        <div class="col-md-8">
+          <h3><i class="fas fa-shopping-basket"></i> | Gin Store Locator</h3>
+          <p>Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting.</p>
+        </div>
+        <div class="col-md-4 mt-sm-3"><img class="img-fluid" src="../assets/images/p5.jpg"></div>
+      </div>
+    </div>
+  </div>
+</div>
