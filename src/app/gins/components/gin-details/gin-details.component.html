@@ -1,2 +1,25 @@
-<br><br><br><br><br><br>
-<h3>Gin is: {{gin?.name + ' ' +gin?.degrees + ' ° '+ gin?.content + 'cl'}}</h3>
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 py-5 mt-5">
+        <div class="card" style="width: 100%;">
+          <img src="{{gin.imageUrl}}" class="card-img-top gin-details-img" alt="{{gin.name}}">
+          <div class="card-body">
+            <h5 class="card-title">{{gin.name}} - {{gin.degrees}}° {{gin.content}}cl</h5>
+            <p class="card-text"><strong>Taste:</strong> {{gin.taste}}</p>
+            <p class="card-text">{{gin.description}}</p>
+            <div class="list-group">
+              <a class="list-group-item list-group-item-action active text-white">
+                Ingredients
+              </a>
+              <a class="list-group-item list-group-item-action" *ngFor="let ingredient of gin.ingredients"><i class="fab fa-pagelines"></i> {{ingredient}}</a>
+            </div>
+            <br>
+            <a href="#" class="btn btn-primary"><i class="fas fa-plus-square"></i> Add to my ginventory</a>&nbsp;
+            <a href="#" class="btn btn-success"><i class="fas fa-plus-square"></i> Add a recipe</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

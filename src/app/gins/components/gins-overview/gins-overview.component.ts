@@ -36,7 +36,7 @@ export class GinsOverviewComponent implements OnInit {
     this.filteredGins = [];
     if(this.searchTerm){
       this.gins.forEach(gin => {
-        if(gin.name.toLowerCase().includes(this.searchTerm.toLowerCase())){
+        if(gin.payload.doc.data().name.toLowerCase().includes(this.searchTerm.toLowerCase())){
           this.filteredGins.push(gin);
         }
       })
