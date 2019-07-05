@@ -7,11 +7,24 @@ export interface GinModel {
   taste: string;
   ingredients: string[]
   reviews?: ReviewModel[];
+  recipes?: RecipeModel[];
 }
 
 export interface ReviewModel {
-  userId: string;
-  ginId?: string;
+  userId?: string;
+  username: string;
+  ginId: string;
+  rating: number;
   review: string;
   datePosted: string;
+}
+
+export interface RecipeModel {
+  name: string;
+  description?: string;
+  dateCreated: string;
+  username: string;
+  userId?: string;
+  ingredients : string[];
+  reviews?: ReviewModel[];
 }

@@ -12,7 +12,7 @@
               <h1 class="display-4">Get ready for Summer! </h1>
               <p class="lead mb-0">Try our Gintastic recipes</p>
               <br>
-              <div class="btn btn-success btn-view-gins" (click)="scrollToElement(section2)"><i class="fas fa-cocktail"></i> View Recipes</div>
+              <div class="btn btn-success btn-view-gins" (click)="scrollToElement(section2)"><i class="fas fa-cocktail"></i> View Gins</div>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="row pt-2">
+      <div class="row pt-2" *ngIf="gins.length > 0">
         <div class="col-12 px-5" *ngFor="let gin of filteredGins; let i = index">
           <mat-card class="example-card main-card" *ngIf="i === 0">
             <mat-card-header>
@@ -52,7 +52,7 @@
           </mat-card>
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="gins.length > 0">
         <div class="col-md-4 pt-4 px-5" *ngFor="let gin of filteredGins | slice: 1">
           <mat-card class="example-card sub-card">
             <mat-card-header>
@@ -69,6 +69,11 @@
               <button mat-button class="btn btn-block btn-primary"><i class="fas fa-plus-square"></i> Add to my ginventory</button>
             </mat-card-actions>
           </mat-card>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 px-5 text-white">
+          <p>No results found.</p>
         </div>
       </div>
     </div>

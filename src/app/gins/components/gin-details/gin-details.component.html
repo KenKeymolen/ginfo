@@ -18,23 +18,36 @@
             <a class="btn btn-primary text-white"><i class="fas fa-plus-square"></i> Add to my ginventory</a>&nbsp;
             <a class="btn btn-success text-white"><i class="fas fa-plus-square"></i> Add a recipe</a>
             <hr>
+            <div class="row">
+              <div class="col-12">
+                <h3 class="card-title">Where to buy?</h3>
+              </div>
+            </div>
+            <hr>
             <h3 class="card-title">Gin Recipes</h3>
-            <div class="row" *ngIf="recipes.length > 0">
-              <div class="col-sm-12 col-md-4" *ngFor="let recipe of recipes">
+            <div class="row" *ngIf="recipes?.length > 0">
+              <div class="col-sm-12 col-md-3" *ngFor="let recipe of recipes">
                 <div class="card" style="width: 100%;">
+                  <div class="card-header">
+                    {{recipe?.name}}
+                  </div>
                   <img src="{{recipe?.imageUrl}}" class="card-img-top" alt="{{recipe?.name}}">
                   <div class="card-body">
-                    <h5 class="card-title">{{recipe?.name}}</h5>
-                    <p class="card-text">{{recipe?.description}}</p>
-                    <ul class="list-unstyled">
+                    <small class="text-muted">created by: {{recipe?.author}}</small>
+                    <p class="card-text"><strong>Description:</strong> <br>{{recipe?.description}}</p>
+                    <ul class="list-unstyled py-0 my-0">
                       <li class="active"><strong>Ingredients</strong></li>
                       <li *ngFor="let ingredient of recipe.ingredients"><i class="fab fa-pagelines"></i> {{ingredient}}</li>
                     </ul>
+                    <div class="mt-2">
+                      <div class="btn btn-sm btn-warning text-white btn-block"><i class="fas fa-edit"></i> Edit Recipe</div>
+                      <div class="btn btn-sm btn-danger btn-block"><i class="fas fa-trash-alt"></i> Delete Recipe</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row" *ngIf="recipes.length <= 0">
+            <div class="row" *ngIf="recipes?.length <= 0">
               <div class="col-12">
                 <p>There are not recipes yet for this gin. Be the first to create one!</p>
               </div>

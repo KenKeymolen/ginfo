@@ -11,6 +11,7 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {environment} from '../environments/environment';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {UserService} from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule
   ],
-  providers: [AngularFirestore],
+  providers: [AngularFirestore, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

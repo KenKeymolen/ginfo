@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GinService} from '../../services/gin.service';
 import {Router} from '@angular/router';
-import {RecipeService} from '../../services/recipe.service';
 
 @Component({
   selector: 'app-gins-overview',
@@ -17,10 +16,7 @@ export class GinsOverviewComponent implements OnInit {
   constructor(private ginService: GinService, private router: Router) { }
 
   ngOnInit() {
-    this.ginService.getAllGins().subscribe(gins => {
-      this.gins = gins;
-      this.filteredGins = this.gins;
-    });
+
   }
 
   clear(){
