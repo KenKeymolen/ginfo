@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   login(credentials) {
     this.authService.doLogin(credentials).then(res => {
       console.log(res);
-    });
+    }, err => this.errorMessage = err);
   }
 
   clear() {

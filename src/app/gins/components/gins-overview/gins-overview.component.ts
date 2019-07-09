@@ -18,15 +18,14 @@ export class GinsOverviewComponent implements OnInit {
     this.gins = [];
     this.ginService.getAllGins().subscribe(gins => {
       Object.keys(gins).forEach(ginKey => {
-        let newGin: GinModel = gins[ginKey];
-        newGin.ginKey = ginKey;
-        this.gins.push(newGin);
+        this.gins.push(gins[ginKey]);
       });
       this.filteredGins = this.gins;
     });
   }
 
   ngOnInit() {
+
   }
 
   clear() {
