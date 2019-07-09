@@ -47,7 +47,7 @@
             </mat-card-content>
             <mat-card-actions>
               <button mat-button class="btn btn-success" (click)="viewGinDetails(gin.ginKey)"><i class="fas fa-eye"></i> View More</button>&nbsp;
-              <button mat-button class="btn btn-primary"><i class="fas fa-plus-square"></i> Add to my ginventory</button>
+              <button mat-button class="btn btn-primary" (click)="onAddToGinventory(gin)"><i class="fas fa-plus-square"></i> Add to my ginventory</button>
             </mat-card-actions>
           </mat-card>
         </div>
