@@ -2,42 +2,41 @@ import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import {Observable, of} from 'rxjs';
+import {Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  url = environment.firebase.databaseURL + 'users.json';
+  url = environment.firebase.databaseURL + 'users/';
+  urlEnd = '.json';
 
   constructor(private _http: HttpClient) {
 
   }
 
   getAllUsers(): Observable<UserModel[]> {
-    return this._http.get<UserModel[]>(this.url);
+    return this._http.get<UserModel[]>(this.url + this.urlEnd);
   }
 
-  createUser(user: UserModel): void {
-    if (this.userAvailable(user)) {
-      this._http.post(this.url , user);
-    } else {
-      console.log('User exists already');
-    }
-  }
-
-  userAvailable(userToCheck): boolean {
-    let available = false;
-    this._http.get(this.url).subscribe(data => {
-      Object.keys(data).forEach(key => {
-        if(data[key].username !== userToCheck.username && data[key].email !== userToCheck.email){
-          available = true;
-        } else {
-          available = false;
-        }
-      });
+  createUser(user: UserModel) {
+    this.getAllUsers().subscribe(users => {
+      if (users[user.userKey] === undefined) {
+        let newUser = user;
+        return this._http.post(this.url + this.urlEnd, user).subscribe((res: any) => {
+          newUser.userKey = res.name;
+          if (res) {
+            this.updateUser(newUser).subscribe();
+          }
+        });
+      } else {
+        return 'User exists already';
+      }
     });
-    return available;
+  }
+
+  updateUser(updatedUser: UserModel) {
+    return this._http.put(this.url + updatedUser.userKey + this.urlEnd, updatedUser);
   }
 }

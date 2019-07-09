@@ -41,6 +41,10 @@ export class GinService {
     return this._http.post(this.url, gin);
   }
 
+  updateGin() {
+
+  }
+
   getGinByKey(key: string): Observable<GinModel> {
     return this._http.get(this.url).pipe(
       map(ginKeys => ginKeys[key]),

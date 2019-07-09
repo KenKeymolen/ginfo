@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../services/auth.service';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AuthService} from '../../services/auth.service';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { UserService} from '../../../services/user.service';
+import { UserModel} from '../../../models/user.model';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +15,7 @@ export class SignupComponent implements OnInit {
   successMessage: string;
   registerForm: FormGroup;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private fb: FormBuilder, private userService: UserService) {
     this.clear();
     this.buildSignupForm();
   }
@@ -35,20 +37,6 @@ export class SignupComponent implements OnInit {
     console.log(this.registerForm);
   }
 
-
-  tryRegister(value) {
-    this.authService.doRegister(value)
-      .then(res => {
-        console.log(res);
-        this.errorMessage = '';
-        this.successMessage = 'Your account has been created';
-      }, err => {
-        console.log(err);
-        this.errorMessage = err.message;
-        this.successMessage = '';
-      });
-  }
-
   onSubmit() {
     this.clear();
     if (this.registerForm.valid === true) {
@@ -61,7 +49,17 @@ export class SignupComponent implements OnInit {
         this.authService.doRegister(this.registerForm.value).then(res => {
           this.successMessage = 'Account created successfully! ';
           // Save user to db + key
-        });
+          let newUser: UserModel = {
+            username: this.registerForm.controls['username'].value,
+            email: this.registerForm.controls['email'].value,
+            userKey: '',
+            active: true,
+            country: this.registerForm.controls['country'].value,
+            memberSince: new Date().toString(),
+            ginventory: [],
+          }
+          this.userService.createUser(newUser);
+        }, err => this.errorMessage = err);
       }
     } else {
       if (this.registerForm.controls['password'].hasError('minlength')) {
