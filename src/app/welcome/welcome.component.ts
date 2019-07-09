@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
+import {UserModel} from '../models/user.model';
 
 
 @Component({
@@ -10,19 +11,24 @@ import {UserService} from '../services/user.service';
 export class WelcomeComponent implements OnInit {
 
   mainBackgroundUrl = '';
+  // dummyUser: UserModel = {
+  //   username: 'KenKeymolen',
+  //   email: 'mayte.vandevelde@hotmail.com',
+  //   userKey: '',
+  //   country: 'Belgium',
+  //   memberSince: new Date().toString(),
+  //   active: true,
+  //   ginventory: []
+  // };
 
   constructor(private userService: UserService) {
     this.mainBackgroundUrl = '../assets/images/background.jpg';
   }
 
   ngOnInit() {
-    this.userService.getAllUsers().subscribe(users => {
-      console.log(users);
-    });
   }
 
   scrollToElement($element): void {
-    console.log($element);
     $element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
   }
 }

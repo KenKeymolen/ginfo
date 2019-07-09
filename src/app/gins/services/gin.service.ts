@@ -10,7 +10,9 @@ import { map } from 'rxjs/operators';
 })
 export class GinService {
 
-  url = environment.firebase.db_url + 'gins.json';
+  url = environment.firebase.databaseURL + 'gins/';
+  urlEnd = '.json';
+
   dummyGin: GinModel = {
     ginKey: '',
     name: 'Marula Gin',
@@ -34,15 +36,29 @@ export class GinService {
   constructor(private _http: HttpClient) { }
 
   getAllGins(): Observable<GinModel[]> {
-    return this._http.get<GinModel[]>(this.url);
+    return this._http.get<GinModel[]>(this.url + this.urlEnd);
   }
 
   createGin(gin: GinModel) {
-    return this._http.post(this.url, gin);
+    this.getAllGins().subscribe(gins => {
+      if (gins[gin.ginKey] === undefined) {
+        let newGin = gin;
+        return this._http.post(this.url + this.urlEnd, gin).subscribe((res: any) => {
+          newGin.ginKey = res.name;
+          if (res) {
+            this.updateGin(newGin).subscribe();
+          }
+        });
+      }
+    });
+  }
+
+  updateGin(updatedGin: GinModel) {
+    return this._http.put(this.url + updatedGin.ginKey + this.urlEnd, updatedGin);
   }
 
   getGinByKey(key: string): Observable<GinModel> {
-    return this._http.get(this.url).pipe(
+    return this._http.get(this.url + this.urlEnd).pipe(
       map(ginKeys => ginKeys[key]),
     );
   }
