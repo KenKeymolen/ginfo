@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class GinService {
 
-  url = environment.firebase.db_url + 'gins.json';
+  url = environment.firebase.databaseURL + 'gins.json';
   dummyGin: GinModel = {
     ginKey: '',
     name: 'Marula Gin',

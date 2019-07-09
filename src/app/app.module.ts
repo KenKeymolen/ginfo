@@ -9,6 +9,11 @@ import { NgmaterialModule } from './shared/modules/ngmaterial/ngmaterial.module'
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UserService} from './services/user.service';
 import { HttpClientModule} from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+
 
 
 
@@ -23,7 +28,10 @@ import { HttpClientModule} from '@angular/common/http';
     NgbootstrapModule,
     NgmaterialModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

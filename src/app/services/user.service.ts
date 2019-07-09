@@ -9,7 +9,7 @@ import {Observable, of} from 'rxjs';
 })
 export class UserService {
 
-  url = environment.firebase.db_url + 'users.json';
+  url = environment.firebase.databaseURL + 'users.json';
 
   constructor(private _http: HttpClient) {
 
