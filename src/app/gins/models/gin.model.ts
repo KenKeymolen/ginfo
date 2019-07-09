@@ -1,16 +1,18 @@
 export interface GinModel {
-  id: string;
   name: string;
+  ginKey: string;
+  status: string;
   description: string;
   content: string;
   degrees: string;
   taste: string;
-  ingredients: string[]
-  reviews?: ReviewModel[];
+  imageUrl: string;
+  ingredients: string[];
+  ginReviews?: GinReviewModel[];
   recipes?: RecipeModel[];
 }
 
-export interface ReviewModel {
+export interface GinReviewModel {
   userId?: string;
   username: string;
   ginId: string;
@@ -23,8 +25,17 @@ export interface RecipeModel {
   name: string;
   description?: string;
   dateCreated: string;
-  username: string;
+  username?: string;
   userId?: string;
-  ingredients : string[];
-  reviews?: ReviewModel[];
+  ingredients: string[];
+  recipeReviews?: RecipeReviewModel[];
+}
+
+export interface RecipeReviewModel {
+  userId?: string;
+  username: string;
+  reviewId: string;
+  rating: number;
+  review: string;
+  datePosted: string;
 }

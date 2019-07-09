@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GinService} from '../../services/gin.service';
 import {Router} from '@angular/router';
+import {GinModel} from '../../models/gin.model';
 
 @Component({
   selector: 'app-gins-overview',
@@ -9,17 +10,26 @@ import {Router} from '@angular/router';
 })
 export class GinsOverviewComponent implements OnInit {
 
-  gins: any[];
+  gins: GinModel[];
   filteredGins: any[];
   searchTerm: string;
 
-  constructor(private ginService: GinService, private router: Router) { }
-
-  ngOnInit() {
-
+  constructor(private ginService: GinService, private router: Router) {
+    this.gins = [];
+    this.ginService.getAllGins().subscribe(gins => {
+      Object.keys(gins).forEach(ginKey => {
+        let newGin: GinModel = gins[ginKey];
+        newGin.ginKey = ginKey;
+        this.gins.push(newGin);
+      });
+      this.filteredGins = this.gins;
+    });
   }
 
-  clear(){
+  ngOnInit() {
+  }
+
+  clear() {
     this.searchTerm = '';
     this.filteredGins = this.gins;
   }
@@ -30,16 +40,16 @@ export class GinsOverviewComponent implements OnInit {
 
   filterGins() {
     this.filteredGins = [];
-    if(this.searchTerm){
+    if (this.searchTerm) {
       this.gins.forEach(gin => {
-        if(gin.payload.doc.data().name.toLowerCase().includes(this.searchTerm.toLowerCase())){
+        if (gin.name.toLowerCase().includes(this.searchTerm.toLowerCase())) {
           this.filteredGins.push(gin);
         }
-      })
+      });
     }
   }
 
-  viewGinDetails(i){
+  viewGinDetails(i) {
     this.router.navigateByUrl('/gins/' + i);
   }
 }

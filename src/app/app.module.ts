@@ -6,12 +6,11 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { NgbootstrapModule } from './shared/modules/ngbootstrap/ngbootstrap.module';
 import { NgmaterialModule } from './shared/modules/ngmaterial/ngmaterial.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AngularFireModule} from '@angular/fire';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
-import {environment} from '../environments/environment';
-import {AngularFirestore} from '@angular/fire/firestore';
-import {UserService} from './services/user.service';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { UserService} from './services/user.service';
+import { HttpClientModule} from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -24,10 +23,9 @@ import {UserService} from './services/user.service';
     NgbootstrapModule,
     NgmaterialModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    HttpClientModule
   ],
-  providers: [AngularFirestore, UserService],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

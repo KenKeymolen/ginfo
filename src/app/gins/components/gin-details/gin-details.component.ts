@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {GinService} from '../../services/gin.service';
+import {GinModel} from '../../models/gin.model';
 
 @Component({
   selector: 'app-gin-details',
@@ -10,11 +11,14 @@ import {GinService} from '../../services/gin.service';
 export class GinDetailsComponent implements OnInit {
 
   ginIndex = '';
-  gin: any;
+  gin: GinModel;
   recipes: any[];
 
   constructor(private route: ActivatedRoute, private ginService: GinService) {
-    this.ginIndex = this.route.snapshot.paramMap.get("id");
+    this.ginIndex = this.route.snapshot.paramMap.get('id');
+    this.ginService.getGinByKey(this.ginIndex).subscribe(gin => {
+      this.gin = gin;
+    });
   }
 
   ngOnInit() {
