@@ -1,0 +1,98 @@
+<div class="container-fluid adminpanel-container">
+  <div class="row bg-success text-white text-center py-2 pt-3 mt-5">
+    <div class="col-4 app-stats"><i class="fas fa-users"></i> Total users: {{totalUsers}}</div>
+    <div class="col-4 app-stats"><i class="fas fa-glass-martini-alt"></i> Total gins: {{totalGins}}</div>
+    <div class="col-4 app-stats"><i class="fas fa-file-alt"></i> Total recipes: {{totalRecipes}}</div>
+  </div>
+  <div class="container">
+    <div class="row py-3">
+      <div class="col-12 pt-5">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#application" role="tab" aria-controls="application" aria-selected="true"><i class="fas fa-wrench"></i> Application Management</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#gin" role="tab" aria-controls="gin" aria-selected="false"><i class="fas fa-database"></i> Gin Management</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#user" role="tab" aria-controls="user" aria-selected="false"><i class="fas fa-user"></i> User Management</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="application" role="tabpanel" aria-labelledby="application-tab">
+            <div class="container-fluid">
+              <div class="row mt-5">
+                <div class="col-6">
+                  <h3>Current Announcement</h3>
+                  <div class="input-group">
+                    <div>
+                      {{announcement.content}}
+                      <hr>
+                      <small><i class="fas fa-calendar-alt"></i> Date Created: {{announcement.dateCreated | date}}</small>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="btn btn-sm btn-warning text-white" *ngIf="announcement.active == true" (click)="changeAnnouncementStatus(false)"><i class="fas fa-toggle-off"></i> Disable announcement</div>
+                  <div class="btn btn-sm btn-success text-white" *ngIf="announcement.active == false" (click)="changeAnnouncementStatus(true)"><i class="fas fa-toggle-on"></i> Enable announcement</div>
+                </div>
+                <div class="col-6">
+                  <h3>Create Announcement</h3>
+                  <div class="input-group">
+                    <textarea class="form-control announcement-input" aria-label="With textarea" [(ngModel)]="announcement.content"></textarea>
+                  </div>
+                  <br>
+                  <div class="btn btn-sm btn-primary" (click)="createNewAnnouncement(announcement)"><i class="fas fa-save"></i> Update & Save</div>&nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="gin" role="tabpanel" aria-labelledby="gin-tab">
+            <div class="container-fluid">
+              <div class="row mt-5">
+                <div class="col-12">
+                  <h3>Gin Management</h3>
+                  <div class="form-row">
+                    <div class="col-xs-3">
+                      <input class="form-control form-control-sm" type="text" placeholder="Search for a gin">
+                    </div>
+                    <div class="col">
+                      <div class="btn btn-sm btn-primary"><i class="fas fa-search"></i> Search</div>&nbsp;
+                      <div class="btn btn-sm btn-success"><i class="fas fa-plus-square"></i> Add Gin</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 mt-3">
+                  <table class="table table-responsive-md text-center" *ngIf="gins.length > 0">
+                    <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Degrees</th>
+                      <th scope="col d-sm-none">Content</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let gin of gins; let i = index">
+                      <th scope="row">{{i + 1}}</th>
+                      <td>{{gin.name}}</td>
+                      <td>{{gin.degrees}}°</td>
+                      <td>{{gin.content}} cl</td>
+                      <td>
+                        <div class="btn btn-sm btn-success"><i class="fas fa-eye"></i></div>&nbsp;
+                        <div class="btn btn-sm btn-warning text-white"><i class="fas fa-edit"></i></div>&nbsp;
+                        <div class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="user-tab">...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

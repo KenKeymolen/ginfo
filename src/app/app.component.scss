@@ -19,3 +19,8 @@
   font-size:14px;
   letter-spacing:2px;
 }
+
+::ng-deep .toast-top-right {
+  top:100px !important;
+}
+

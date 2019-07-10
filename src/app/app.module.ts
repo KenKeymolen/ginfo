@@ -15,6 +15,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import {AuthService} from './auth/services/auth.service';
 import {ToastrModule} from "ngx-toastr";
+import { AdminpanelComponent } from './adminpanel/adminpanel.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -22,7 +24,8 @@ import {ToastrModule} from "ngx-toastr";
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    AdminpanelComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,8 @@ import {ToastrModule} from "ngx-toastr";
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
