@@ -19,7 +19,7 @@
       </header>
     </div>
   </div>
-  <div class="row pb-5 mx-0" *ngIf="!loading && errorMessage === ''">
+  <div class="row pb-5 mx-0">
     <div class="container">
       <div class="row pt-1">
         <div class="col-12 pt-4 px-5" #section2>
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="row pt-2" *ngIf="gins != null && gins.length > 0">
+      <div class="row pt-2" *ngIf="!loading && errorMessage === '' && gins != null && gins.length > 0">
         <div class="col-12 px-5" *ngFor="let gin of filteredGins; let i = index">
           <mat-card class="example-card main-card" *ngIf="i === 0">
             <mat-card-header>
@@ -52,7 +52,7 @@
           </mat-card>
         </div>
       </div>
-      <div class="row" *ngIf="gins != null && gins.length > 0">
+      <div class="row" *ngIf="!loading && errorMessage === '' && gins != null && gins.length > 0">
         <div class="col-md-4 pt-4 px-5" *ngFor="let gin of filteredGins | slice: 1">
           <mat-card class="example-card sub-card">
             <mat-card-header>
