@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   successMessage = '';
   loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private fb: FormBuilder, private toastr: ToastrService) {
     this.createLoginForm();
   }
 
@@ -30,7 +31,9 @@ export class LoginComponent implements OnInit {
 
   login(credentials) {
     this.authService.doLogin(credentials).then(res => {
-      console.log(res);
+      if(res) {
+        this.toastr.success('You\'ve been logged in successfully!');
+      }
     }, err => this.errorMessage = err);
   }
 

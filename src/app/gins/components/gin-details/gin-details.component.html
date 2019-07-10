@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="container">
-    <div class="row">
+    <div class="row" *ngIf="!loading && errorMessage === ''">
       <div class="col-12 py-5 mt-5">
         <div class="card" style="width: 100%;">
           <img src="{{gin?.imageUrl}}" class="card-img-top gin-details-img" alt="{{gin?.name}}">
@@ -55,6 +55,16 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="loading && errorMessage === ''">
+      <div class="col-12 py-5 mt-5">
+        <i class="fas fa-spinner fa-spin"></i> Loading details.. Please wait
+      </div>
+    </div>
+    <div class="row" *ngIf="errorMessage != ''">
+      <div class="col-12 py-5 mt-5">
+        <i class="fas fa-exclamation-triangle"></i> Something went wrong.. <br> Details: {{errorMessage}}
       </div>
     </div>
   </div>

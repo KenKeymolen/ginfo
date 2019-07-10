@@ -18,11 +18,14 @@ export class AuthService {
         this.user.username = res.displayName;
         this.user.email = res.email;
         this.user.uId = res.uid;
-        console.log(res);
       } else {
         this.user = null;
       }
     });
+  }
+
+  isAuthenticated(): boolean {
+    return this.afAuth.auth.currentUser != null;
   }
 
   doGoogleLogin() {
@@ -57,15 +60,6 @@ export class AuthService {
           });
           resolve(res);
         }, err => reject(err));
-    });
-  }
-
-  isLoggedIn() {
-    this.afAuth.user.subscribe(res => {
-      console.log('User: ', res);
-    });
-    this.afAuth.authState.subscribe( res => {
-      console.log('AuthState: ', res);
     });
   }
 

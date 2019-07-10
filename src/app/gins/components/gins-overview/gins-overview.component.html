@@ -19,7 +19,7 @@
       </header>
     </div>
   </div>
-  <div class="row pb-5">
+  <div class="row pb-5 mx-0" *ngIf="!loading && errorMessage === ''">
     <div class="container">
       <div class="row pt-1">
         <div class="col-12 pt-4 px-5" #section2>
@@ -46,7 +46,7 @@
               </p>
             </mat-card-content>
             <mat-card-actions>
-              <button mat-button class="btn btn-success" (click)="viewGinDetails(gin.ginKey)"><i class="fas fa-eye"></i> View More</button>&nbsp;
+              <button mat-button class="btn btn-success" (click)="viewGinDetails(gin.ginKey)"><i class="fas fa-eye"></i> Read More</button>&nbsp;
               <button mat-button class="btn btn-primary" (click)="onAddToGinventory(gin)"><i class="fas fa-plus-square"></i> Add to my ginventory</button>
             </mat-card-actions>
           </mat-card>
@@ -65,15 +65,19 @@
               </p>
             </mat-card-content>
             <mat-card-actions>
-              <button mat-button class="btn btn-block btn-success" (click)="viewGinDetails(gin.ginKey)"><i class="fas fa-eye"></i> View More</button>
+              <button mat-button class="btn btn-block btn-success" (click)="viewGinDetails(gin.ginKey)"><i class="fas fa-eye"></i> Read More</button>
               <button mat-button class="btn btn-block btn-primary"><i class="fas fa-plus-square"></i> Add to my ginventory</button>
             </mat-card-actions>
           </mat-card>
         </div>
-      </div>
-      <div class="row" *ngIf="gins === null || gins === undefined">
-        <div class="col-12 px-5 text-white">
-          <p>No results found.</p>
+        <div class="col-12 text-white px-5" *ngIf="loading">
+          <i class="fas fa-spinner fa-spin"></i> Loading gins.. Please wait
+        </div>
+        <div class="col-12 text-white px-5" *ngIf="errorMessage != ''">
+          <i class="fas fa-exclamation-triangle"></i> Something went wrong.. <br> Details: {{errorMessage}}
+        </div>
+        <div class="col-12 text-white px-5" *ngIf="filteredGins.length <= 0">
+          <i class="fas fa-exclamation-triangle"></i> {{filterResult}} &nbsp;<div class="btn btn-sm btn-primary" (click)="clear()"><i class="fas fa-sync-alt"></i> Try another search</div>
         </div>
       </div>
     </div>

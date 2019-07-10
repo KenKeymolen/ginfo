@@ -4,6 +4,7 @@ import { HttpClient} from '@angular/common/http';
 import { environment} from '../../../environments/environment';
 import { Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class GinService {
     imageUrl: 'https://cdn.shopify.com/s/files/1/1158/9148/products/18_1024x1024.png?v=1551147668',
   };
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private toastr: ToastrService) { }
 
   getAllGins(): Observable<GinModel[]> {
     return this._http.get<GinModel[]>(this.url + this.urlEnd);
@@ -47,8 +48,9 @@ export class GinService {
           newGin.ginKey = res.name;
           if (res) {
             this.updateGin(newGin).subscribe();
+            this.toastr.success('Gin has been added successfully!')
           }
-        });
+        }, err => this.toastr.error(err));
       }
     });
   }

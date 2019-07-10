@@ -3,6 +3,7 @@ import { AuthService} from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserService} from '../../../services/user.service';
 import { UserModel} from '../../../models/user.model';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,7 @@ export class SignupComponent implements OnInit {
   successMessage: string;
   registerForm: FormGroup;
 
-  constructor(private authService: AuthService, private fb: FormBuilder, private userService: UserService) {
+  constructor(private authService: AuthService, private fb: FormBuilder, private userService: UserService, private toastr: ToastrService) {
     this.clear();
     this.buildSignupForm();
   }

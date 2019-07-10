@@ -13,15 +13,24 @@ export class GinDetailsComponent implements OnInit {
   ginIndex = '';
   gin: GinModel;
   recipes: any[];
+  loading = false;
+  errorMessage: string;
 
   constructor(private route: ActivatedRoute, private ginService: GinService) {
+    this.errorMessage = '';
     this.ginIndex = this.route.snapshot.paramMap.get('id');
-    this.ginService.getGinByKey(this.ginIndex).subscribe(gin => {
-      this.gin = gin;
-    });
+    this.loadGinDetails();
   }
 
   ngOnInit() {
 
+  }
+
+  loadGinDetails() {
+    this.loading = true
+    this.ginService.getGinByKey(this.ginIndex).subscribe(gin => {
+      this.gin = gin;
+      this.loading = false;
+    }, err => this.errorMessage = err);
   }
 }

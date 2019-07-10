@@ -13,30 +13,31 @@
         <a class="nav-link" [routerLinkActive]="['active']" routerLink="/gins/list">Gins</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLinkActive]="['active']">Stores</a>
+        <a class="nav-link" *ngIf="" [routerLinkActive]="['active']" routerLink="/profile/overview">Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="authService.user && authService.user !== null" [routerLinkActive]="['active']" routerLink="/profile/overview">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" *ngIf="authService.user && authService.user.email === 'ken.keymolen@gmail.com'" [routerLinkActive]="['active']" routerLink="/admin/panel">AdminPanel</a>
+        <a class="nav-link" *ngIf="false && authService.user.email === 'ken.keymolen@gmail.com'" [routerLinkActive]="['active']" routerLink="/admin/panel">AdminPanel</a>
       </li>
     </ul>
-    <ul class="navbar-nav mr-right user-info" [ngbPopover]="popContent" [autoClose]="'outside'"
-        triggers="manual" #p="ngbPopover" (click)="p.open()" *ngIf="authService.user !== null">
-      <li class="nav-item">
-        <a class="nav-link">Welcome, {{authService.user?.username}} <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item"><i class="fas fa-user-circle fa-2x mt-1"></i></li>
-    </ul>
-    <ul class="navbar-nav mr-right user-info" *ngIf="authService.user === null">
-      <li class="nav-item">
-        <div class="btn btn-sm btn-outline-success" routerLink="/auth/login"><i class="fas fa-sign-in-alt"></i> Login</div>
-      </li>&nbsp;
-      <li class="nav-item">
-        <div class="btn btn-sm btn-outline-success" routerLink="/auth/signup"><i class="fas fa-user-plus"></i> SignUp</div>
-      </li>
-    </ul>
+    <ng-container *ngIf="authService.isAuthenticated()">
+      <ul class="navbar-nav mr-right user-info" [ngbPopover]="popContent" [autoClose]="'outside'"
+          triggers="manual" #p="ngbPopover" (click)="p.open()">
+        <li class="nav-item">
+          <a class="nav-link">Welcome, {{authService.user?.username}} <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item"><i class="fas fa-user-circle fa-2x mt-1"></i></li>
+      </ul>
+    </ng-container>
+    <ng-container *ngIf="!authService.isAuthenticated()">
+      <ul class="navbar-nav mr-right user-info">
+        <li class="nav-item">
+          <div class="btn btn-sm btn-outline-success" routerLink="/auth/login"><i class="fas fa-sign-in-alt"></i> Login</div>
+        </li>&nbsp;
+        <li class="nav-item">
+          <div class="btn btn-sm btn-outline-success" routerLink="/auth/signup"><i class="fas fa-user-plus"></i> SignUp</div>
+        </li>
+      </ul>
+    </ng-container>
     <ng-template #popContent>
       <div class="container">
         <div class="row text-center">

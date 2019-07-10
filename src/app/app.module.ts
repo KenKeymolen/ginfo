@@ -14,6 +14,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import {AuthService} from './auth/services/auth.service';
+import {ToastrModule} from "ngx-toastr";
 
 
 
@@ -29,6 +30,7 @@ import {AuthService} from './auth/services/auth.service';
     NgbootstrapModule,
     NgmaterialModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
