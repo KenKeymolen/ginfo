@@ -1,0 +1,10 @@
+<div class="text-white p-3">
+  <h1 mat-dialog-title>{{data.title}}</h1>
+  <div mat-dialog-content>
+    <p>{{data.content}}</p>
+  </div>
+  <div mat-dialog-actions>
+    <button class="btn btn-outline-success" [mat-dialog-close]="data" cdkFocusInitial><i class="fas fa-check-circle"></i> Confirm</button>&nbsp;
+    <button class="btn btn-outline-danger" (click)="onNoClick()"><i class="fas fa-window-close"></i> Cancel</button>
+  </div>
+</div>

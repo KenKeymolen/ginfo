@@ -6,6 +6,10 @@ import {ApplicationmanagementService} from "../services/applicationmanagement.se
 import {ToastrService} from "ngx-toastr";
 import {GinModel} from "../gins/models/gin.model";
 import {GinService} from "../gins/services/gin.service";
+import {Router} from "@angular/router";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {CustomModalComponent} from "../shared/components/custom-modal/custom-modal.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-adminpanel',
@@ -20,12 +24,23 @@ export class AdminpanelComponent implements OnInit {
   totalGins;
   totalRecipes;
   announcement: AnnouncementModel;
+
   gins: GinModel[];
+
+  filteredGins: GinModel[];
+  searchTerm: string;
+  filterResult: string;
+
+  animal: string;
+  name: string;
 
   constructor(private _http: HttpClient,
               private app: ApplicationmanagementService,
               private toastr: ToastrService,
-              private ginService: GinService) {
+              private ginService: GinService,
+              private router: Router,
+              private modal: NgbModal,
+              public dialog: MatDialog) {
     this.announcement = {
       active: undefined,
       content: '',
@@ -61,6 +76,7 @@ export class AdminpanelComponent implements OnInit {
       Object.keys(gins).forEach(ginKey => {
         this.gins.push(gins[ginKey]);
       });
+      this.filteredGins = this.gins;
     });
   }
 
@@ -83,6 +99,22 @@ export class AdminpanelComponent implements OnInit {
     });
   }
 
+  filterGins() {
+    console.log(this.searchTerm);
+    if (this.searchTerm) {
+      this.filteredGins = [];
+      this.gins.forEach(gin => {
+        if (gin.name.toLowerCase().includes(this.searchTerm.toLowerCase())) {
+          this.filteredGins.push(gin);
+        } else {
+          this.filterResult = 'No results found matching your search';
+        }
+      });
+    } else {
+      this.loadGins();
+    }
+  }
+
   createNewAnnouncement(announcement) {
     announcement.dateCreated = new Date().toString();
     announcement.active = false;
@@ -91,4 +123,32 @@ export class AdminpanelComponent implements OnInit {
     })
   }
 
+  onDeleteGin(ginKey: string) {
+    this.ginService.deleteGin(ginKey).subscribe(res => {
+      this.loadGins();
+      this.toastr.success('Gin successfully deleted', 'Deletion Successfull', {timeOut: 5000});
+    }, err => this.toastr.error(err));
+  }
+
+  onViewGinDetails(gin: GinModel) {
+    this.router.navigateByUrl('/gins/' + gin.ginKey);
+  }
+
+  openDialog(title: string, content: string, reason: string, gin: GinModel): void {
+    const dialogRef = this.dialog.open(CustomModalComponent, {
+      width: '500px',
+      data: {title: title, content: content, reason: reason, ginKey: gin.ginKey}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result != undefined) {
+        console.log(result);
+        switch(result.reason) {
+          case 'delete':
+            this.onDeleteGin(result.ginKey);
+          break;
+        }
+      }
+    });
+  }
 }

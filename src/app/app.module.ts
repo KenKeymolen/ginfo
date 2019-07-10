@@ -17,6 +17,7 @@ import {AuthService} from './auth/services/auth.service';
 import {ToastrModule} from "ngx-toastr";
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { CustomModalComponent } from './shared/components/custom-modal/custom-modal.component';
 
 
 
@@ -25,7 +26,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   declarations: [
     AppComponent,
     WelcomeComponent,
-    AdminpanelComponent
+    AdminpanelComponent,
+    CustomModalComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
   providers: [UserService, AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CustomModalComponent],
+  exports: []
 })
 export class AppModule { }

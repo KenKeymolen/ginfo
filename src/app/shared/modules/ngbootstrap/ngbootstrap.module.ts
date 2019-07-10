@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalModule, NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [],
@@ -8,7 +8,8 @@ import { NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
   ],
   exports: [
-    NgbPopoverModule
+    NgbPopoverModule,
+    NgbModalModule
   ]
 })
 export class NgbootstrapModule { }

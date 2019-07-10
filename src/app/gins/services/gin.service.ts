@@ -59,6 +59,10 @@ export class GinService {
     return this._http.put(this.url + updatedGin.ginKey + this.urlEnd, updatedGin);
   }
 
+  deleteGin(ginKey: string) {
+    return this._http.delete(this.url + ginKey + this.urlEnd);
+  }
+
   getGinByKey(key: string): Observable<GinModel> {
     return this._http.get(this.url + this.urlEnd).pipe(
       map(ginKeys => ginKeys[key]),
